@@ -1,11 +1,193 @@
 /* Color Palette:
-Light Shades: #DBDCCE;
-Light Accent: #EBC98F;
-Main Brand Color: #B0984D;
-Dark Accent: #747E86;
-Dark Shades: #A23840;
+Light Shades: #F8F8F4;
+Light Accent: #A1A09B;
+Main Brand Color: #E4BC5A;
+Dark Accent: #9B6D46;
+Dark Shades: #554445;
 */
 
 * {
     box-sizing: border-box;
+    /* background-color removed from universal selector so inline elements don't inherit it */
+}
+
+/* make page a column flex container so footer can be pushed to bottom */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #A1A09B;
+    margin: 0;
+    padding: 0 12px;
+}
+
+/* center header title/subtitle while keeping nav intact */
+header {
+    text-align: center;
+    padding: 28px 0;
+}
+
+/* container to limit line length and center main sections */
+.lists {
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 18px;
+    box-sizing: border-box;
+}
+
+/* name centered and reset margins */
+.name {
+    color: #9B6D46;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+}
+
+/* profile picture centered and circular */
+.pfp {
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    width: 210px;
+    height: 210px;
+    object-fit: cover;
+}
+
+/* center figure and caption */
+figure {
+    text-align: center;
+    margin: 0 auto 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #E4Bc5A;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+p, ol, ul, figcaption {
+    color: #554445;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+a {
+    color: #f8f8f4;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #A1A09B;
+}
+
+.navbar li {
+  float: right;
+}
+
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar li a:hover {
+  background-color: #111111;
+}
+
+/* --- three-column layout: bio in middle and alternating backgrounds --- */
+.three-columns {
+    display: flex;
+    gap: 18px;
+    max-width: 1200px;
+    margin: 28px auto;
+    padding: 0 6px 18px;
+    box-sizing: border-box;
+}
+
+/* column defaults: side columns use flex:1, middle column is larger (flex:1.8) */
+.three-columns .column {
+    flex: 1 1 200px;
+    padding: 18px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    float: none; /* override older float rules */
+    min-width: 0; /* allow flex to shrink correctly */
+}
+
+/* make middle column bigger */
+.three-columns .column:nth-child(2) {
+    flex: 1.8 1 360px;
+}
+
+/* alternating backgrounds: darker for outside columns, lighter for middle */
+.three-columns .column:nth-child(1),
+.three-columns .column:nth-child(3) {
+    background: rgba(85,68,69,0.18); /* darker outside */
+    color: #F8F8F4;
+}
+
+.three-columns .column:nth-child(2) {
+    background: rgba(248,248,244,0.98); /* lighter middle */
+    color: #554445;
+}
+
+/* headings and spacing inside columns */
+.three-columns .column h3 {
+    margin-top: 0;
+    color: #9B6D46;
+}
+
+.three-columns .column p,
+.three-columns .column ol,
+.three-columns .column ul {
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+}
+
+/* responsive: stack columns on small screens and preserve readable widths */
+@media (max-width: 900px) {
+    .three-columns {
+        flex-direction: column;
+        padding: 0;
+        gap: 16px;
+    }
+
+    /* When stacked, use the lighter background for all for readability on narrow screens */
+    .three-columns .column {
+        flex: none;
+        width: 100%;
+        background: rgba(248,248,244,0.96);
+        color: #554445;
+    }
+}
+
+/* ensure footer stays at bottom */
+footer {
+    margin-top: auto; /* pushes footer to bottom of viewport when content is short */
+    background: rgba(85,68,69,0.06);
+    padding: 14px 0;
+    text-align: center;
+    color: #554445;
+}
+
+/* small-screen adjustments */
+.rowafter {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* legacy column fallback for very wide screens (kept minimal) */
+@media screen and (min-width: 1300px) {
+  .three-columns .column {
+    min-height: 220px;
+  }
 }
